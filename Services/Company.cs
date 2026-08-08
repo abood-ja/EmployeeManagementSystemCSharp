@@ -117,5 +117,21 @@ namespace EmployeeManagementSystem.Services
             Console.WriteLine("=============================");
         }
 
+        public void DisplayActionHistory()
+        {
+            Console.WriteLine("Action History:");
+
+            foreach (string action in ActionHistory)
+                Console.WriteLine(action);
+        }
+
+        public void DisplayCompanySkills()
+        {
+            Console.WriteLine("Company Skills:");
+
+            foreach (string skill in Skills)
+                Console.WriteLine(skill);
+        }
+
     }
 }
