@@ -48,6 +48,10 @@ namespace EmployeeManagementSystem.Services
                 throw new InvalidOperationException("there are no employees in onboarding queue");
             Employee employee = OnBoarding.Dequeue();
             ActiveEmployees.Add(employee);
+            foreach (string skill in employee.Skills)
+            {
+                Skills.Add(skill);
+            }
             ActionHistory.Push($"a new employee is not Active: Employee[{employee.Id}], EmployeeName: {employee.Name}");
         }
 
@@ -132,6 +136,27 @@ namespace EmployeeManagementSystem.Services
             foreach (string skill in Skills)
                 Console.WriteLine(skill);
         }
+
+        public void AddSkillToEmployee(int employeeId, string skill)
+        {
+            if (string.IsNullOrWhiteSpace(skill))
+                throw new ArgumentException("Skill name is required.");
+
+            Employee? employee = FindEmployeeById(employeeId);
+
+            if (employee is null)
+                throw new InvalidOperationException($"Employee with Id {employeeId} was not found.");
+
+            string normalizedSkill = skill.Trim();
+
+            if (!employee.Skills.Contains(normalizedSkill))
+                employee.Skills.Add(normalizedSkill);
+
+            Skills.Add(normalizedSkill);
+            ActionHistory.Push($"Added skill {normalizedSkill} to {employee.Name}");
+        }
+
+        
 
     }
 }
