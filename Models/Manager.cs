@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.Models
 {
-    internal class Manager
+    public class Manager:Employee
     {
+        public List<Employee> TeamMembers=new List<Employee>();
     }
 }
