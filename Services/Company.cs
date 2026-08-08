@@ -71,6 +71,19 @@ namespace EmployeeManagementSystem.Services
             return null;
         }
 
+        public List<Employee> GetAllEmployeesOfDepartmentById(int DepartmentId)
+        {
+            List<Employee> employees = new();
+            if (!Departments.TryGetValue(DepartmentId, out Department? department))
+                throw new InvalidOperationException($"Department Id {DepartmentId} does not exist.");
+            foreach(var emp in ActiveEmployees)
+            {
+                if (emp.DepartmentId == DepartmentId)
+                    employees.Add(emp);
+            }
+            return employees;
+        }
+
         
     }
 }
