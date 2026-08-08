@@ -84,6 +84,38 @@ namespace EmployeeManagementSystem.Services
             return employees;
         }
 
-        
+        public decimal CalculateAverageSalary()
+        {
+            if(ActiveEmployees.Count==0) return 0;
+            decimal totalSalary = 0;
+            foreach(var emp in ActiveEmployees)
+            {
+                totalSalary+= emp.Salary;
+            }
+            return totalSalary/ActiveEmployees.Count;
+        }
+
+        public void DisplayDepartmentsReport()
+        {
+            Console.WriteLine("===== Department Report =====");
+            Console.WriteLine();
+
+            foreach (KeyValuePair<int, Department> pair in Departments)
+            {
+                int employeeCount = 0;
+
+                foreach (Employee employee in ActiveEmployees)
+                {
+                    if (employee.DepartmentId == pair.Key)
+                        employeeCount++;
+                }
+
+                Console.WriteLine($"{pair.Value.Name,-10}: {employeeCount} employees");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("=============================");
+        }
+
     }
 }
