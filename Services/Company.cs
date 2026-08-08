@@ -45,14 +45,14 @@ namespace EmployeeManagementSystem.Services
         public void ProcessNextEmployeeInOnBoarding()
         {
             if (OnBoarding.Count == 0)
-                throw new InvalidOperationException("there are no employees in onboarding queue");
+                throw new InvalidOperationException("there are no employees in the onboarding queue");
             Employee employee = OnBoarding.Dequeue();
             ActiveEmployees.Add(employee);
             foreach (string skill in employee.Skills)
             {
                 Skills.Add(skill);
             }
-            ActionHistory.Push($"a new employee is not Active: Employee[{employee.Id}], EmployeeName: {employee.Name}");
+            ActionHistory.Push($"a new employee is now Active: Employee[{employee.Id}], EmployeeName: {employee.Name}");
         }
 
         public Employee? FindEmployeeByName(string name)
